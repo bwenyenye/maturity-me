@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 
 # File paths - using Path for consistent path handling
-OVERALL_RANKINGS_PATH = "AI Maturity Overall Performance.xlsx"
+OVERALL_RANKINGS_PATH = "AI Maturity Overall Perfomance.xlsx"
 INFRASTRUCTURE_RANKINGS_PATH = "Infrastructure Ranking.xlsx"
 INVESTMENTS_RANKINGS_PATH = "Investment Ranking.xlsx"
 

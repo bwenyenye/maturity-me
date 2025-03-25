@@ -29,14 +29,14 @@ class DataProcessor:
             
             # Check for alternative column names
             possible_country_cols = ['Country', 'country', 'Nation', 'nation']
-            possible_points_cols = ['Points', 'points', 'Score', 'score']
+            possible_points_cols = ['Points', 'points', 'Score', 'score', 'Total', 'total']  # Added Total
             possible_rank_cols = ['Rank', 'rank', 'Ranking', 'ranking']
-            
-            # Find the actual column names
+
+            # Find the actual column names in the DataFrame
             country_col = next((col for col in possible_country_cols if col in df.columns), None)
             points_col = next((col for col in possible_points_cols if col in df.columns), None)
             rank_col = next((col for col in possible_rank_cols if col in df.columns), None)
-            
+
             if not all([country_col, points_col, rank_col]):
                 missing = []
                 if not country_col:
@@ -46,13 +46,14 @@ class DataProcessor:
                 if not rank_col:
                     missing.append(f"Rank (tried: {possible_rank_cols})")
                 raise ValueError(f"Missing required columns: {', '.join(missing)}")
-            
+
+            # Process the data
             rankings = []
             for _, row in df.iterrows():
                 rankings.append({
                     "country": str(row[country_col]),
-                    "points": float(row[points_col]) if pd.notnull(row[points_col]) else 0.0,
-                    "rank": int(row[rank_col]) if pd.notnull(row[rank_col]) else 0
+                    "points": float(row[points_col]),
+                    "rank": int(row[rank_col])
                 })
             return rankings
         except Exception as e:
